@@ -1,5 +1,5 @@
 import './App.css';
-import {useInput, useTabs} from "./hooks";
+import {useInput, useTabs, useTitle} from "./hooks";
 
 const content = [{
   tab: "Section1", content: "This is Section 1",
@@ -11,6 +11,9 @@ const App = () => {
   const maxLength = (value) => !value.includes("@");
   const name = useInput("Mr.", maxLength);
   const {currenItem, changeItem} = useTabs(0, content);
+  const titleUpdater = useTitle("Loading...");
+
+  setTimeout(() => titleUpdater('Home'), 2000);
 
   return (<div className="App">
     <header className="App-header">
