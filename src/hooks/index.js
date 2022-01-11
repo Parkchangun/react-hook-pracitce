@@ -4,3 +4,4 @@ export {default as useTitle} from './useTitle';
 export {default as useClick} from './useClick';
 export {default as useConfirm} from './useConfirm';
 export {default as usePreventLeave} from './usePreventLeave';
+export {default as useBeforeLeave} from './useBeforeLeave';
