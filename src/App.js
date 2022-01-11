@@ -1,5 +1,5 @@
 import './App.css';
-import {useClick, useConfirm, useInput, useTabs, useTitle} from "./hooks";
+import {useClick, useConfirm, useInput, usePreventLeave, useTabs, useTitle} from "./hooks";
 
 const content = [{
   tab: "Section1", content: "This is Section 1",
@@ -23,12 +23,16 @@ const App = () => {
   const abortFeature = () => console.log('Aborted.');
   const confirmDelete = useConfirm('Are you sure?', deleteFeature, abortFeature);
 
+  const {enablePrevent: protect, disablePrevent: unprotect} = usePreventLeave();
+
   return (<div className="App">
     <header className="App-header">
       <input ref={inputRef} placeholder={"Name"} {...name}/>
       {content.map((section, index) => <button key={index} onClick={() => changeItem(index)}>{section.tab}</button>)}
       <div>{currenItem.content}</div>
       <button onClick={() => confirmDelete()}>Delete Button</button>
+      <button onClick={() => protect()}>Protect</button>
+      <button onClick={() => unprotect()}>Unprotect</button>
     </header>
   </div>);
 }
