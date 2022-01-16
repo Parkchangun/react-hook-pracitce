@@ -1,5 +1,5 @@
 import './App.css';
-import { useBeforeLeave, useClick, useConfirm, useInput, usePreventLeave, useTabs, useTitle } from './hooks';
+import { useBeforeLeave, useClick, useConfirm, useFadeIn, useInput, usePreventLeave, useTabs, useTitle } from './hooks';
 
 const content = [{
   tab: 'Section1', content: 'This is Section 1',
@@ -16,6 +16,7 @@ const App = () => {
     console.log('test');
   };
   const inputRef = useClick();
+  const fadeRef = useFadeIn(2);
 
   setTimeout(() => titleUpdater('Home'), 2000);
 
@@ -37,6 +38,7 @@ const App = () => {
       <button onClick={() => confirmDelete()}>Delete Button</button>
       <button onClick={() => protect()}>Protect</button>
       <button onClick={() => unprotect()}>Unprotect</button>
+      <div {...fadeRef}>useFadeIn</div>
     </header>
   </div>);
 };
