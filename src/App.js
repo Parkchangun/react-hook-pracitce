@@ -1,5 +1,7 @@
 import './App.css';
-import { useBeforeLeave, useClick, useConfirm, useFadeIn, useInput, usePreventLeave, useTabs, useTitle } from './hooks';
+import {
+  useBeforeLeave, useClick, useConfirm, useFadeIn, useInput, useNetwork, usePreventLeave, useTabs, useTitle,
+} from './hooks';
 
 const content = [{
   tab: 'Section1', content: 'This is Section 1',
@@ -16,7 +18,6 @@ const App = () => {
     console.log('test');
   };
   const inputRef = useClick();
-  const fadeRef = useFadeIn(2);
 
   setTimeout(() => titleUpdater('Home'), 2000);
 
@@ -30,6 +31,14 @@ const App = () => {
 
   useBeforeLeave(beforeLeave);
 
+  const fadeRef = useFadeIn(2);
+
+
+  const handleNetworkChange = (status) => {
+    console.log(status ? 'Online' : 'Offline');
+  }
+  const status = useNetwork(handleNetworkChange);
+
   return (<div className='App'>
     <header className='App-header'>
       <input ref={inputRef} placeholder={'Name'} {...name} />
@@ -39,6 +48,7 @@ const App = () => {
       <button onClick={() => protect()}>Protect</button>
       <button onClick={() => unprotect()}>Unprotect</button>
       <div {...fadeRef}>useFadeIn</div>
+      <h1>{status ? "Online" : "Offline"}</h1>
     </header>
   </div>);
 };
