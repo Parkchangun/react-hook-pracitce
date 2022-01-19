@@ -1,6 +1,16 @@
 import './App.css';
 import {
-  useBeforeLeave, useClick, useConfirm, useFadeIn, useInput, useNetwork, usePreventLeave, useTabs, useTitle,
+  useBeforeLeave,
+  useClick,
+  useConfirm,
+  useFadeIn,
+  useFullScreen,
+  useInput,
+  useNetwork,
+  usePreventLeave,
+  useScroll,
+  useTabs,
+  useTitle,
 } from './hooks';
 
 const content = [{
@@ -36,10 +46,17 @@ const App = () => {
 
   const handleNetworkChange = (status) => {
     console.log(status ? 'Online' : 'Offline');
-  }
+  };
   const status = useNetwork(handleNetworkChange);
 
-  return (<div className='App'>
+  const { y } = useScroll();
+
+  const checkFullscreen = (isFull) => {
+    console.log(isFull ? 'We are Full!' : 'We are not Full');
+  };
+  const { element, triggerFull, exitFull } = useFullScreen(checkFullscreen);
+
+  return (<div className='App' style={{ height: '1000vh' }}>
     <header className='App-header'>
       <input ref={inputRef} placeholder={'Name'} {...name} />
       {content.map((section, index) => <button key={index} onClick={() => changeItem(index)}>{section.tab}</button>)}
@@ -48,7 +65,14 @@ const App = () => {
       <button onClick={() => protect()}>Protect</button>
       <button onClick={() => unprotect()}>Unprotect</button>
       <div {...fadeRef}>useFadeIn</div>
-      <h1>{status ? "Online" : "Offline"}</h1>
+      <h1>{status ? 'Online' : 'Offline'}</h1>
+      <h2 style={{ position: 'fixed', color: y > 100 ? 'red' : 'blue' }}>useScrollTest</h2>
+      <div ref={element}>
+        <img src={'https://t1.daumcdn.net/cfile/tistory/9966BC445BEFEBBA01'} />
+        <button onClick={() => exitFull()}>Exit Fullscreen</button>
+      </div>
+      <button onClick={() => triggerFull()}>Make Fullscreen</button>
+
     </header>
   </div>);
 };
