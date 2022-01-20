@@ -6,7 +6,7 @@ import {
   useFadeIn,
   useFullScreen,
   useInput,
-  useNetwork,
+  useNetwork, useNotification,
   usePreventLeave,
   useScroll,
   useTabs,
@@ -56,6 +56,10 @@ const App = () => {
   };
   const { element, triggerFull, exitFull } = useFullScreen(checkFullscreen);
 
+  const triggerNotification = useNotification("This is Notification", {
+    body: "Notification Body"
+  });
+
   return (<div className='App' style={{ height: '1000vh' }}>
     <header className='App-header'>
       <input ref={inputRef} placeholder={'Name'} {...name} />
@@ -72,6 +76,7 @@ const App = () => {
         <button onClick={() => exitFull()}>Exit Fullscreen</button>
       </div>
       <button onClick={() => triggerFull()}>Make Fullscreen</button>
+      <button onClick={triggerNotification}>Notification</button>
 
     </header>
   </div>);
