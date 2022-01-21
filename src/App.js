@@ -1,5 +1,6 @@
 import './App.css';
 import {
+  useAxios,
   useBeforeLeave,
   useClick,
   useConfirm,
@@ -56,10 +57,13 @@ const App = () => {
   };
   const { element, triggerFull, exitFull } = useFullScreen(checkFullscreen);
 
-  const triggerNotification = useNotification("This is Notification", {
-    body: "Notification Body"
+  const triggerNotification = useNotification('This is Notification', {
+    body: 'Notification Body',
   });
 
+  const {loading, data, refetch} = useAxios({ url: '/api/v2/list_movies.json' });
+
+  console.log(loading, data, error);
   return (<div className='App' style={{ height: '1000vh' }}>
     <header className='App-header'>
       <input ref={inputRef} placeholder={'Name'} {...name} />
@@ -77,7 +81,11 @@ const App = () => {
       </div>
       <button onClick={() => triggerFull()}>Make Fullscreen</button>
       <button onClick={triggerNotification}>Notification</button>
-
+      <div>
+        <h1>{data && data.status}</h1>
+        <h2>{loading && "Loading"}</h2>
+      </div>
+      <button onClick={() => refetch()}>Refetch</button>
     </header>
   </div>);
 };

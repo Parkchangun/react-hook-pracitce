@@ -10,3 +10,4 @@ export { default as useNetwork } from './useNetwork';
 export { default as useScroll } from './useScroll';
 export { default as useFullScreen } from './useFullScreen';
 export { default as useNotification } from './useNotification';
+export { default as useAxios } from './useAxios';
