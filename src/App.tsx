@@ -5,7 +5,6 @@ import {
   useClick,
   useConfirm,
   useFadeIn,
-  useFullScreen,
   useInput,
   useNetwork, useNotification,
   usePreventLeave,
@@ -28,6 +27,7 @@ const App = () => {
   const onClick = () => {
     console.log('test');
   };
+  // @ts-ignore
   const inputRef = useClick();
 
   setTimeout(() => titleUpdater('Home'), 2000);
@@ -52,18 +52,18 @@ const App = () => {
 
   const { y } = useScroll();
 
-  const checkFullscreen = (isFull) => {
-    console.log(isFull ? 'We are Full!' : 'We are not Full');
-  };
-  const { element, triggerFull, exitFull } = useFullScreen(checkFullscreen);
+  // const checkFullscreen = (isFull) => {
+  //   console.log(isFull ? 'We are Full!' : 'We are not Full');
+  // };
+  // const { element, triggerFull, exitFull } = useFullScreen(checkFullscreen);
 
   const triggerNotification = useNotification('This is Notification', {
     body: 'Notification Body',
   });
 
-  const {loading, data, refetch} = useAxios({ url: '/api/v2/list_movies.json' });
+  const { loading, data, refetch } = useAxios({ url: '/api/v2/list_movies.json' });
 
-  console.log(loading, data, error);
+  console.log(loading, data);
   return (<div className='App' style={{ height: '1000vh' }}>
     <header className='App-header'>
       <input ref={inputRef} placeholder={'Name'} {...name} />
@@ -75,15 +75,15 @@ const App = () => {
       <div {...fadeRef}>useFadeIn</div>
       <h1>{status ? 'Online' : 'Offline'}</h1>
       <h2 style={{ position: 'fixed', color: y > 100 ? 'red' : 'blue' }}>useScrollTest</h2>
-      <div ref={element}>
-        <img src={'https://t1.daumcdn.net/cfile/tistory/9966BC445BEFEBBA01'} />
-        <button onClick={() => exitFull()}>Exit Fullscreen</button>
-      </div>
-      <button onClick={() => triggerFull()}>Make Fullscreen</button>
+      {/*<div ref={element}>*/}
+      {/*  <img src={'https://t1.daumcdn.net/cfile/tistory/9966BC445BEFEBBA01'} />*/}
+      {/*  <button onClick={() => exitFull()}>Exit Fullscreen</button>*/}
+      {/*</div>*/}
+      {/*<button onClick={() => triggerFull()}>Make Fullscreen</button>*/}
       <button onClick={triggerNotification}>Notification</button>
       <div>
         <h1>{data && data.status}</h1>
-        <h2>{loading && "Loading"}</h2>
+        <h2>{loading && 'Loading'}</h2>
       </div>
       <button onClick={() => refetch()}>Refetch</button>
     </header>

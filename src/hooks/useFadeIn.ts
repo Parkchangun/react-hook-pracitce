@@ -7,7 +7,9 @@ const useFadeIn = (duration = 1) => {
     if(typeof duration !== 'number') return;
     if (element.current) {
       const { current } = element;
+      // @ts-ignore
       current.style.transition = `opacity ${duration}s`;
+      // @ts-ignore
       current.style.opacity = 1;
     }
   }, []);

@@ -7,10 +7,12 @@ const useClick = (onClick) => {
     if (typeof onClick !== 'function') {
       return;
     }
-    
+
+    // @ts-ignore
     el.current?.addEventListener('click', onClick);
 
     return () => {
+      // @ts-ignore
       el.current?.removeEventListener('click', onClick);
     }
 
